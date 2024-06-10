@@ -1,4 +1,63 @@
 class Account:
+    def main():
+        accounts={}
+        while True:
+            print("\nWelcome to the Bank Of Kochi")
+            print("1. Create Account")
+            print("2. Deposit Money")
+            print("3. Withdraw Money")
+            print("4. Show Balance")
+            print("5. Exit")
+            choice=input("Enter your choice: ")
+
+            if choice== "1":
+                accnumber=input("Enter account number: ")
+                if accnumber in accounts:
+                    print("Account number already exists!")
+                    continue
+                name = input("Enter account holder name: ")
+                try:
+                    initialbalance=float(input("Enter initial balance: "))
+                    accounts[accnumber]=Account(accnumber, name, initialbalance)
+                    print(f"Account created for {name} with balance Rs{initialbalance}")
+                except ValueError:
+                    print("Invalid input. Please enter a integer value for initial balance")
+            elif choice== "2":
+                accnumber=input("Enter account number: ")
+                if accnumber in accounts:
+                    try:
+                        amount=float(input("Enter amount to deposit: "))
+                        accounts[accnumber].deposit(amount)
+                    except ValueError:
+                        print("Invalid input. Please enter a numeric value.")
+                        continue
+                else:
+                    print("Account not found")
+
+            elif choice== "3":
+                accnumber=input("Enter account number: ")
+                if accnumber in accounts:
+                    amount= float(input("Enter amount to withdraw: "))
+                    accounts[accnumber].withdraw(amount)
+                else:
+                    print("Account not found")
+
+            elif choice=="4":
+                accnumber=input("Enter account number: ")
+                if accnumber in accounts:
+                    accounts[accnumber].showbalance()
+                else:
+                    print("Account not found")
+
+            elif choice=="5":
+                for acc in accounts.values():
+                    acc.savetransactionhistory()
+                print("Exiting the system. Transaction histories saved.")
+                break
+
+            else:
+                print("Invalid choice, please try again.")
+
     def __init__(self,accnumber,name,initialbalance):
         self.accnumber=accnumber
         self.name=name
@@ -27,58 +86,6 @@ class Account:
                 file.write(transaction + "\n")
 
 
-def main():
-    accounts={}
-    while True:
-        print("\nWelcome to the Bank Of Kochi")
-        print("1. Create Account")
-        print("2. Deposit Money")
-        print("3. Withdraw Money")
-        print("4. Show Balance")
-        print("5. Exit")
-        choice=input("Enter your choice: ")
-
-        if choice== "1":
-            accnumber=input("Enter account number: ")
-            if accnumber in accounts:
-                print("Account number already exists!")
-                continue
-            name = input("Enter account holder name: ")
-            initialbalance = float(input("Enter initial balance: "))
-            accounts[accnumber] = Account(accnumber, name, initialbalance)
-            print(f"Account created for {name} with balance Rs{initialbalance}")
-
-        elif choice== "2":
-            accnumber=input("Enter account number: ")
-            if accnumber in accounts:
-                amount=float(input("Enter amount to deposit: "))
-                accounts[accnumber].deposit(amount)
-            else:
-                print("Account not found")
-
-        elif choice== "3":
-            accnumber=input("Enter account number: ")
-            if accnumber in accounts:
-                amount= float(input("Enter amount to withdraw: "))
-                accounts[accnumber].withdraw(amount)
-            else:
-                print("Account not found")
-
-        elif choice=="4":
-            accnumber=input("Enter account number: ")
-            if accnumber in accounts:
-                accounts[accnumber].showbalance()
-            else:
-                print("Account not found")
-
-        elif choice=="5":
-            for acc in accounts.values():
-                acc.savetransactionhistory()
-            print("Exiting the system. Transaction histories saved.")
-            break
-
-        else:
-            print("Invalid choice, please try again.")
 
 
-main()
+
