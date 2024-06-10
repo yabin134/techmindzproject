@@ -17,7 +17,7 @@ def playermove(icon):
         number=1
     elif icon=="O":
         number=2
-    print("Your turn player {}".format(number))
+    print(f"Your turn player {number}")
     choice=int(input("Enter your move (1-9): "))
     if board[choice-1]==" ":
         board[choice-1]=icon
