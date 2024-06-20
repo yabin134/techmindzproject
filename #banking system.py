@@ -89,6 +89,4 @@ class Account:
             else:
                 print("Invalid choice, please try again.")
 
-# Run the main method
-if __name__ == "__main__":
     Account.main()
